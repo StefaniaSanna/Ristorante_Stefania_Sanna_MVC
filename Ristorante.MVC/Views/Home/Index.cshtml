@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+     @if (!User.Identity.IsAuthenticated)
+    {
+        
+        <a class="btn btn-primary" value="Login" asp-controller="Utenti" asp-action="Login">Login</a>
+        <h1 class="display-4">Otto Bontà</h1>
+        <img  width="500" height="538" src="https://www.casavisualshop.it/wp-content/uploads/2019/12/MaybeYourHouse-350x434.jpg" />
+    }
+    else
+    {
+         <img width=100% height=100% src="https://menu.sluurpy.it/foto-g/72966/3258054.jpg" />
+        
+    }
+
+</div>

@@ -1,0 +1,49 @@
+﻿@model List<PiattoViewModel>
+
+<h1>Piatti offerti dalla casa</h1>
+
+
+@if (User.IsInRole("Ristoratore"))
+{
+    <a type=button class="btn btn-primary" asp-controller="Piatti" asp-action="Create">Inserisci un nuovo piatto</a>
+}
+
+<table class="table table-hover table-bordered table-striped">
+
+    <thead>
+        <tr>
+
+            <th>Tipologia</th>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            @if (User.IsInRole("Ristoratore"))
+            {
+                <th>Azione</th>
+               
+            }
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.Tipologia.ToString()</td>
+                <td>@item.Nome</td>
+                <td>@item.Prezzo</td>
+                <td>
+                    @if (User.IsInRole("Ristoratore"))
+                    {
+
+
+                        <a asp-controller="Piatti" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Aggiorna</a>
+                        <a asp-controller="Piatti" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Elimina</a>
+                        <a asp-controller="Piatti" asp-action="Assign" asp-route-id="@item.Id" class="btn btn-primary">Assegna</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

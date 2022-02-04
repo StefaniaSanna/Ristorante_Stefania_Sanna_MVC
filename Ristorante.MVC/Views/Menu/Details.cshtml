@@ -1,0 +1,62 @@
+﻿@model List<PiattoViewModel>
+
+@{
+    decimal totale = 0;
+
+    @foreach (var item in Model)
+    {
+        totale += item.Prezzo;
+    }
+
+
+}
+
+    <table class="table table-hover table-bordered table-striped">
+
+    <thead>
+        <tr>
+
+            <th>Nome</th>
+            <th>Prezzo</th>
+            @if (User.IsInRole("Ristoratore"))
+            {
+
+                <th>Azione</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.Nome</td>
+                <td>@item.Prezzo</td>
+                @if (User.IsInRole("Ristoratore"))
+                {
+                    <td>
+                        <a asp-controller="Piatti" asp-action="Decouple" asp-route-id="@item.Id" class="btn btn-primary">Togli dal menù</a>
+
+                    </td>
+
+                }
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Costo del menù</th>
+
+            <th>@totale</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+
+
+
